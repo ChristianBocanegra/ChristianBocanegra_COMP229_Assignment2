@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Assignment - Backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Express",
+    "JavaScript"
+  ],
+  "author": "Christian Bocanegra",
+  "license": "MIT"
+}
