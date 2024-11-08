@@ -1,6 +1,6 @@
-let contactModel = require('../models/contact');
+let contactModel = require('../models/contacts');
 
-module.exports.createContact = async function (req, res, next) {
+module.exports.createContacts = async function (req, res, next) {
         try {
         let contact = new contactModel(req.body);
         let result = await contactModel.create(contact);
@@ -16,21 +16,27 @@ module.exports.createContact = async function (req, res, next) {
     }
 }
 
+exports.getAllContacts = (req, res) => {
+    contactModel.find()
+        .then(contacts => {
+            if (!contacts || contacts.length === 0) {
+                return res.status(404).json({
+                    message: "No contacts found"
+                });
+            }
+            console.log('Contacts:', contacts);
+            res.status(200).json(contacts);
+        })
+        .catch(err => {
+            console.error('Error retrieving contacts:', err);
+            res.status(500).json({
+                message: "Error retrieving contacts",
+                error: err.message
+            });
+        });
+};
 
-
-module.exports.getAllContact = async function (req, res, next) {
-    try {
-        let list = await contactModel.find({});
-        res.json(list);
-    }
-    catch(err){
-        console.log(err);
-        next(err);
-    }
-}
-
-// Get contact by id
-module.exports.getContact = async function (req, res, next) {
+module.exports.getContacts = async function (req, res, next) {
     try {
         let uID = req.params.id;
         req.contac = await contactModel.findOne({_id: uID}); 
@@ -47,7 +53,7 @@ module.exports.contactByID = async function (req, res, next) {
 }
 
 
-module.exports.updateContact = async function (req, res, next) {
+module.exports.updateContacts = async function (req, res, next) {
     try {
         let uID = req.params.id;
         let updateContact = new contactModel(req.body);
@@ -70,7 +76,7 @@ module.exports.updateContact = async function (req, res, next) {
     }
 }
 
-module.exports.deleteContact = async function (req, res, next) {
+module.exports.deleteContacts = async function (req, res, next) {
     try {
         let uID = req.params.id;
 
